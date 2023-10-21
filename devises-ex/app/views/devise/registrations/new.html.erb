@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Author Registration</title>
+
+    <!-- CSS Libraries -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css" rel="stylesheet" />
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .card-custom {
+            border-radius: 10px;
+        }
+
+        .btn-custom {
+            border-radius: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container py-5">
+        <div class="card card-custom mx-auto shadow-lg" style="max-width: 500px;">
+            <div class="card-body p-5">
+                <h3 class="card-title text-center mb-4">Create Account</h3>
+                <p class="text-center mb-5">Join our community of readers and authors!</p>
+
+                <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+                    <%= render "devise/shared/error_messages", resource: resource %>
+
+                    <div class="mb-4">
+                        <%= f.label :name, class: "form-label" %>
+                        <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "form-control", placeholder: "Full Name" %>
+                    </div>
+
+                    <div class="mb-4">
+                        <%= f.label :email, class: "form-label" %>
+                        <%= f.email_field :email, autocomplete: "email", class: "form-control", placeholder: "Email Address" %>
+                    </div>
+
+                    <div class="mb-4">
+                        <%= f.label :password, class: "form-label" %>
+                        <% if @minimum_password_length %>
+                            <small class="form-text text-muted">(<%= @minimum_password_length %> characters minimum)</small>
+                        <% end %>
+                        <%= f.password_field :password, autocomplete: "new-password", class: "form-control", placeholder: "Password" %>
+                    </div>
+
+                    <div class="mb-4">
+                        <%= f.label :password_confirmation, class: "form-label" %>
+                        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control", placeholder: "Confirm Password" %>
+                    </div>
+
+                    <%= f.submit "Sign up", class: "btn btn-custom btn-primary btn-block" %>
+                <% end %>
+
+                <hr class="my-4">
+
+                <div class="text-center">
+                    <p>Already have an account?</p>
+                    <%= render "devise/shared/links" %>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JS Libraries -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"></script>
+</body>
+
+</html>

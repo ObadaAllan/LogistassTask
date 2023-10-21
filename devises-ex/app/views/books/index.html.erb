@@ -1,0 +1,81 @@
+<!-- app/views/books/index.html.erb -->
+<div class="container mt-3">
+  <h1>Books</h1>
+
+  <div class="mb-3">
+
+   
+
+    <%= link_to "New Book", new_book_path, class: "btn btn-primary" %>
+    <!-- Add Export CSV button -->
+    <%= link_to "Export CSV", books_path(format: :csv), class: "btn btn-secondary" %>
+    <%= link_to "Reset Filters", reset_filterrific_url, class: "btn btn-danger" %>
+   
+  </div>
+<div class="mb-3">
+
+   <%= form_with(url: books_path, method: :get, local: true, html: { id: "filterForm" }) do %>
+    <%= label_tag(:filterrific_search_query, "Search") %>
+    <%= text_field_tag("filterrific[search_query]", @filterrific.search_query, class: "form-control", id: "search_query") %>
+    <%= submit_tag("Search", class: "btn btn-primary") %>
+</div>
+
+
+  <!-- Filterrific form -->
+  <%= form_with(url: books_path, method: :get, local: true, html: { id: "filterForm" }) do |f| %>
+    <div class="row">
+      <div class="col-md-4">
+        <%= label_tag(:filterrific_sorted_by, "Sort by") %>
+        <%= select_tag("filterrific[sorted_by]", options_for_select(@filterrific.select_options[:sorted_by], @filterrific.sorted_by), include_blank: true, class: "form-control", onchange: "filterForm.submit();") %>
+      </div>
+
+      <div class="col-md-4">
+        <%= label_tag(:filterrific_with_author_id, "Author") %>
+        <%= select_tag("filterrific[with_author_id]", options_for_select(@filterrific.select_options[:with_author_id], @filterrific.with_author_id), include_blank: true, class: "form-control", onchange: "filterForm.submit();") %>
+      </div>
+
+
+      
+<% end %>
+
+
+      </div>
+
+      
+
+      <!-- Include other filter fields as needed -->
+
+      
+    </div>
+  <% end %>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Release Date</th>
+        <th scope="col">Author</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @books.each do |book| %>
+        <tr>
+          <th scope="row"><%= book.id %></th>
+          <td><%= book.name %></td>
+          <td><%= book.release_date %></td>
+          <td><%= book.author.name %></td>
+          <td>
+            <%= link_to "Show", book, class: "btn btn-sm btn-info" %>
+            <%= link_to "Edit", edit_book_path(book), class: "btn btn-sm btn-warning" %>
+            <%= button_to "Delete", book, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-sm btn-danger" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <!-- Pagination links -->
+  <%= paginate @books, params: request.query_parameters %>
+</div>

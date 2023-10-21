@@ -1,0 +1,7 @@
+<div class="container">
+  <h1><%= @author.name %></h1>
+  <p>Email: <%= @author.email %></p>
+
+  <%= link_to 'Edit', author_edit_authors_path(@author), class: 'btn btn-warning' %> |
+  <%= link_to 'Back', authors_path, class: 'btn btn-default' %>
+</div>

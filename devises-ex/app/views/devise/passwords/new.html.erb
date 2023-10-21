@@ -1,0 +1,30 @@
+   <section class="vh-100">
+    <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+      <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+            <div class="card" style="border-radius: 15px;">
+              <div class="card-body p-5">
+                <h2 class="text-uppercase text-center mb-5">Forgot your password?</h2>
+                    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+                       <%= render "devise/shared/error_messages", resource: resource %>
+                        <div class=" mb-4">
+                          <%= f.label :email,class:"form-label" %><br />
+                          <%= f.email_field :email, autofocus: true, autocomplete: "email",class:"form-control form-control-lg" %>
+                        </div>
+                        <div class="d-flex justify-content-center">
+                          <%= f.submit "Send",class:"btn btn-success btn-block btn-lg gradient-custom-4 text-body" %>
+                         
+                        </div>
+                         <p class="small fw-bold mt-2 pt-1 mb-0"> 
+                                  <%= render "devise/shared/links" %>
+                         </p>
+                     <% end %>
+               <%# </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section> %>
+
